@@ -52,7 +52,7 @@
   </a-animation>
 </a-entity>
 
-
+<a-marker type="pattern" url="pattern-mihir_image (1).patt"> 
 		
 		<a-plane rotation="-90 0 0" color="#3199f9" opacity="0.95" navigate-on-click="url: https://www.linkedin.com/in/utkarshgpta/">
 			<a-image src="https://s.gravatar.com/avatar/78156753f9d8feaebe2418780bdc262b?s=250"></a-image>
@@ -81,13 +81,14 @@
 		</a-plane>
 
         <a-text id="infoText" value="Loading..." position="0 0.1 0.2" width="1.5" align="center" color="white"></a-text>
-		
-		<a-entity id="camera" cursor="rayOrigin: mouse"></a-entity>
+      </a-marker>
+        <a-entity camera></a-entity>
+        <a-entity id="camera" cursor="rayOrigin: mouse"></a-entity> 
         
-<a-marker-camera preset='hiro'></a-marker-camera>
+<!--<a-marker-camera preset='hiro'></a-marker-camera>-->
           
             <!-- put other <a-plane> and <a-box> elements here too -->
-          </a-marker>
+          
           
 	</a-scene>
     <script>
