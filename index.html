@@ -1,0 +1,117 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>The AR Business Card</title>
+  <meta name="description" content="AR.js Business Card">
+  <meta name="author" content="Utkarsh Gupta">
+  <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
+	<script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.0/aframe/build/aframe-ar.js"></script>
+
+	<script>
+	  AFRAME.registerComponent('navigate-on-click', {
+	    schema: {
+	      url: {default: ''}
+	    },
+	    init: function () {
+	      var data = this.data;
+	      var el = this.el;
+	      el.addEventListener('click', function () {
+		window.open(data.url, '_blank');
+	      });
+	    }
+	  });        
+	</script>
+</head>
+	
+<body style='margin : 0px; overflow: hidden;'>
+	<a-scene embedded arjs='trackingMethod: best;'>
+		
+		<a-assets>
+			<img id="github_icon" src="https://cdn3.iconfinder.com/data/icons/social-media-2169/24/social_media_social_media_logo_github-512.png">
+			<img id="insta_icon" src="https://cdn3.iconfinder.com/data/icons/social-media-2169/24/social_media_social_media_logo_instagram-512.png">
+			<img id="linkedin_icon" src="https://cdn3.iconfinder.com/data/icons/social-media-2169/24/social_media_social_media_logo_likedin-512.png">
+			<img id="facebook_icon" src="https://cdn3.iconfinder.com/data/icons/social-media-2169/24/social_media_social_media_logo_facebook-512.png">
+           
+            <img id="whatsapp_icon" src="https://cdn-icons-png.flaticon.com/512/733/733585.png">
+            <img id="email_icon" src="https://cdn-icons-png.flaticon.com/512/732/732200.png">
+            <a-asset-item id="cartoonModel" src="criminalbundle_free_fire.glb"></a-asset-item>
+
+        </a-assets>
+        <a-entity gltf-model="#cartoonModel"
+          position="0 0 1.2"
+          scale="0.4 0.4 0.4"
+          rotation="0 90 0">
+  <a-animation attribute="rotation"
+               to="0 450 0"
+               dur="8000"
+               easing="linear"
+               repeat="indefinite">
+  </a-animation>
+</a-entity>
+
+
+		
+		<a-plane rotation="-90 0 0" color="#3199f9" opacity="0.95" navigate-on-click="url: https://www.linkedin.com/in/utkarshgpta/">
+			<a-image src="https://s.gravatar.com/avatar/78156753f9d8feaebe2418780bdc262b?s=250"></a-image>
+			<a-text align="center" value="Hello, World!\nThis is a business card.\nI'm Adv. Mihir Chauhan.\P.S.Exhibits random behaviour when opening links." color="black" width="1" z-offset="0.1"></a-text>
+		</a-plane>
+		
+		<a-plane position="0 0 0.8" color="transparent" opacity="0" width="2" height="0.3" rotation="-90 0 0">
+            <a-box src="#whatsapp_icon" position="-0.2 0 0" depth="0.15" height="0.15" width="0.15"
+            navigate-on-click="url: https://wa.me/91XXXXXXXXXX">
+            <a-animation attribute="rotation" dur="5000" to="0 360 0" easing="linear" repeat="indefinite"></a-animation>
+          </a-box>
+          <a-box src="#email_icon" position="0.2 0 0" depth="0.15" height="0.15" width="0.15"
+          navigate-on-click="url: mailto:yourname@email.com">
+          <a-animation attribute="rotation" dur="5000" to="0 360 0" easing="linear" repeat="indefinite"></a-animation>
+        </a-box>
+			<a-box src="#linkedin_icon" position="0.4 0 0" depth="0.15" height="0.15" width="0.15" navigate-on-click="url: https://www.linkedin.com/in/utkarshgpta/">
+				<a-animation attribute="rotation" dur="7000" to="0 360 0" easing="linear" repeat="indefinite"></a-animation>
+			</a-box>
+			<a-box src="#facebook_icon" position="0.8 0 0" depth="0.15" height="0.15" width="0.15" navigate-on-click="url: http://facebook.com/utkarshgpta">
+				<a-animation attribute="rotation" dur="7000" to="0 360 0" easing="linear" repeat="indefinite"></a-animation>
+			</a-box>
+		</a-plane>
+		
+		<a-plane position="1.2 0 0" width="1" height="1" rotation="-90 0 0" opcatity="1">
+			<a-image src="img/assets/nyancat.jpg"></a-image>
+		</a-plane>
+
+        <a-text id="infoText" value="Loading..." position="0 0.1 0.2" width="1.5" align="center" color="white"></a-text>
+		
+		<a-entity id="camera" cursor="rayOrigin: mouse"></a-entity>
+        
+<a-marker-camera preset='hiro'></a-marker-camera>
+          
+            <!-- put other <a-plane> and <a-box> elements here too -->
+          </a-marker>
+          
+	</a-scene>
+    <script>
+        window.onload = function () {
+          fetch("https://docs.google.com/spreadsheets/d/1cFt2ab4Q757yySBB0CqxjYLnXGdqp0_EzXzfnScFWXs/gviz/tq?tqx=out:json")
+            .then(res => res.text())
+            .then(dataText => {
+              const json = JSON.parse(dataText.substring(47).slice(0, -2)); // Clean JSONP
+              const row = json.table.rows[0].c; // Assuming the first row has your info
+      
+              const name = row[0]?.v || 'Name not found';
+              const phone = row[1]?.v || 'Phone not found';
+              const email = row[2]?.v || 'Email not found';
+              const address = row[3]?.v || 'Address not found';
+      
+              // Now update the A-Frame <a-text>
+              const contactEl = document.querySelector('#contact-text');
+              if (contactEl) {
+                contactEl.setAttribute('value', `Name: ${name}\nPhone: ${phone}\nEmail: ${email}\nAddress: ${address}`);
+              }
+            });
+        };
+      </script>
+      
+     
+</body>
+</html>
