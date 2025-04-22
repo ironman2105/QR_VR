@@ -81,7 +81,7 @@
         <a-entity camera></a-entity>
         <a-entity id="camera" cursor="rayOrigin: mouse"></a-entity> 
         
-<a-marker-camera preset='hiro'></a-marker-camera>-->
+<a-marker-camera preset='hiro'></a-marker-camera>
           
             <!-- put other <a-plane> and <a-box> elements here too 
           
@@ -111,37 +111,99 @@
       
      
 </body>
-</html>-->
+</html>
+-->
 
-<!DOCTYPE html>
+
+<!doctype html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AR Business Card</title>
-    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/ar.js@3.3.2/aframe/build/aframe-ar.js"></script>
+  <meta charset="utf-8">
+
+  <title>The AR Business Card</title>
+  <meta name="description" content="AR.js Business Card">
+  <meta name="author" content="Utkarsh Gupta">
+  <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
+	<script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.0/aframe/build/aframe-ar.js"></script>
+
+	<script>
+	  AFRAME.registerComponent('navigate-on-click', {
+	    schema: {
+	      url: {default: ''}
+	    },
+	    init: function () {
+	      var data = this.data;
+	      var el = this.el;
+	      el.addEventListener('click', function () {
+		window.open(data.url, '_blank');
+	      });
+	    }
+	  });        
+	</script>
 </head>
-<body style="margin: 0; overflow: hidden;">
-    <a-scene embedded arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;">
-        <!-- AR Content -->
-        <a-box position="0 0.5 0" rotation="0 45 0" color="blue" depth="0.2" height="0.2" width="0.2"></a-box>
-        <a-text value="Hello, scan the business card to view AR content!" position="0 1 0" color="black"></a-text>
+	
+<body style='margin : 0px; overflow: hidden;'>
+	<a-scene embedded arjs='trackingMethod: best;'>
+		
+		<a-assets>
+		
+            <img id="whatsapp_icon" src="https://cdn-icons-png.flaticon.com/512/733/733585.png">
+            <img id="email_icon" src="https://cdn-icons-png.flaticon.com/512/732/732200.png">
+		</a-assets>
+		
+        <a-marker type="pattern" url="pattern-mihir_image (1).patt"> 
+        
+		<a-plane rotation="-90 0 0" color="#3199f9" opacity="0.95">
+			<a-image src="https://s.gravatar.com/avatar/78156753f9d8feaebe2418780bdc262b?s=250"></a-image>
+			<a-text align="center" value="Hello, World!\nThis is a business card.\nI'm Adv. Mihir Chauhan.\P.S.Exhibits random behaviour when opening links." color="black" width="1" z-offset="0.1"></a-text>
+		</a-plane>
+		
+		<a-plane position="0 0 0.8" color="transparent" opacity="0" width="2" height="0.3" rotation="-90 0 0">
+            
+            <!--<a-box src="#whatsapp_icon" position="-0.2 0 0" depth="0.15" height="0.15" width="0.15"
+            navigate-on-click="url: https://wa.me/91XXXXXXXXXX">
+            <a-animation attribute="rotation" dur="5000" to="0 360 0" easing="linear" repeat="indefinite"></a-animation>
+          </a-box>
+          <a-box id="emailBox" src="#email_icon" position="0.2 0 0" depth="0.15" height="0.15" width="0.15">
+            <a-animation attribute="rotation" dur="5000" to="0 360 0" easing="linear" repeat="indefinite"></a-animation>
+          </a-box> -->  
+          <a-box id="emailBox" class="clickable" src="#email_icon" position="0.2 0 0"
+       depth="0.15" height="0.15" width="0.15">
+  <a-animation attribute="rotation" dur="5000" to="0 360 0" easing="linear" repeat="indefinite"></a-animation>
+  <a-text value="Email: veeksha.dikshit21@gmail.com" position="0.45 0 0"
+              width="2" align="left" color="white"></a-text>
+</a-box>
 
-        <!-- Social Media Icons and Links -->
-        <a-image src="https://cdn3.iconfinder.com/data/icons/social-media-2169/24/social_media_social_media_logo_facebook-512.png" 
-                 position="-0.5 0 -1" 
-                 width="0.5" 
-                 height="0.5" 
-                 navigate-on-click="url: https://www.facebook.com/yourprofile"></a-image>
-        <a-image src="https://cdn-icons-png.flaticon.com/512/733/733585.png" 
-                 position="0.5 0 -1" 
-                 width="0.5" 
-                 height="0.5" 
-                 navigate-on-click="url: https://wa.me/yourwhatsappphonenumber"></a-image>
+<a-box id="whatsappBox" class="clickable" src="#whatsapp_icon" position="-0.2 0 0"
+       depth="0.15" height="0.15" width="0.15">
+  <a-animation attribute="rotation" dur="5000" to="0 360 0" easing="linear" repeat="indefinite"></a-animation>
+  <a-text value="WhatsApp: +91 XXXXX XXXXX" position="-0.15 0 0"
+              width="2" align="left" color="white"></a-text>
+</a-box>        
 
-        <!-- Camera -->
-        <a-entity camera></a-entity>
-    </a-scene>
+          <!--<a-box src="#email_icon" position="0.2 0 0" depth="0.15" height="0.15" width="0.15"
+          onclick="window.location.href='mailto:veeksha.dikshit21@gmail.com';">
+          <a-animation attribute="rotation" dur="5000" to="0 360 0" easing="linear" repeat="indefinite"></a-animation>
+        </a-box> -->
+ 		</a-plane>
+    </a-marker>
+         <a-entity camera></a-entity>
+		<a-entity id="camera" cursor="rayOrigin: mouse"></a-entity> 
+        
+		<!--<a-marker-camera preset='hiro'></a-marker-camera>-->
+	</a-scene>
+      <script>
+        document.addEventListener('DOMContentLoaded', function () {
+          document.querySelector('#emailBox').addEventListener('click', function () {
+            window.open('mailto:veeksha.dikshit21@gmail.com', '_blank');
+          });
+      
+          document.querySelector('#whatsappBox').addEventListener('click', function () {
+            window.open('https://wa.me/91XXXXXXXXXX', '_blank');
+          });
+        });
+      </script>
+      
 </body>
 </html>
