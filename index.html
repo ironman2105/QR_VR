@@ -1,4 +1,4 @@
-<!doctype html>
+<!--<!doctype html>
 
 <html lang="en">
 <head>
@@ -75,19 +75,15 @@
 				<a-animation attribute="rotation" dur="7000" to="0 360 0" easing="linear" repeat="indefinite"></a-animation>
 			</a-box>
 		</a-plane>
-		
-		<a-plane position="1.2 0 0" width="1" height="1" rotation="-90 0 0" opcatity="1">
-			<a-image src="img/assets/nyancat.jpg"></a-image>
-		</a-plane>
 
         <a-text id="infoText" value="Loading..." position="0 0.1 0.2" width="1.5" align="center" color="white"></a-text>
       </a-marker>
         <a-entity camera></a-entity>
         <a-entity id="camera" cursor="rayOrigin: mouse"></a-entity> 
         
-<!--<a-marker-camera preset='hiro'></a-marker-camera>-->
+<a-marker-camera preset='hiro'></a-marker-camera>-->
           
-            <!-- put other <a-plane> and <a-box> elements here too -->
+            <!-- put other <a-plane> and <a-box> elements here too 
           
           
 	</a-scene>
@@ -114,5 +110,38 @@
       </script>
       
      
+</body>
+</html>-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AR Business Card</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/ar.js@3.3.2/aframe/build/aframe-ar.js"></script>
+</head>
+<body style="margin: 0; overflow: hidden;">
+    <a-scene embedded arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;">
+        <!-- AR Content -->
+        <a-box position="0 0.5 0" rotation="0 45 0" color="blue" depth="0.2" height="0.2" width="0.2"></a-box>
+        <a-text value="Hello, scan the business card to view AR content!" position="0 1 0" color="black"></a-text>
+
+        <!-- Social Media Icons and Links -->
+        <a-image src="https://cdn3.iconfinder.com/data/icons/social-media-2169/24/social_media_social_media_logo_facebook-512.png" 
+                 position="-0.5 0 -1" 
+                 width="0.5" 
+                 height="0.5" 
+                 navigate-on-click="url: https://www.facebook.com/yourprofile"></a-image>
+        <a-image src="https://cdn-icons-png.flaticon.com/512/733/733585.png" 
+                 position="0.5 0 -1" 
+                 width="0.5" 
+                 height="0.5" 
+                 navigate-on-click="url: https://wa.me/yourwhatsappphonenumber"></a-image>
+
+        <!-- Camera -->
+        <a-entity camera></a-entity>
+    </a-scene>
 </body>
 </html>
